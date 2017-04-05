@@ -1,0 +1,153 @@
+<!DOCTYPE>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/style.css" rel="stylesheet">
+	<script src="js/jquery-3.2.0.min.js"></script>
+</head>
+
+<body>
+	<div class="cl-nav-bar">
+		<img src="images/ic_menu_white_24px.svg" class="cl-nav-ico" onClick="toogleMenu()" />
+	</div>
+
+	<nav class="cl-drawer-menu cl-shadow" id="drawer">
+		<div class="cl-drawer-menu-header">
+			<div class="cl-drawer-menu-header-bar">
+				<img src="images/ic_close_white_24px.svg" class="cl-action-icon-right" id="ic-close" onClick="toogleMenu()" />
+			</div>
+			<div class="cl-drawer-menu-header-content">
+				<img src="images/ic_avatar.svg" class="cl-avatar-ico" id="ic-avatar" />
+				<label id="label-name" class="label-primary-light">Arthur Cordova Stapassoli</label>
+				<label id="label-email" class="label-secondary-light ">arthur.stapassoli@philips.com</label>
+			</div>
+		</div>
+
+		<div class="cl-drawer-menu-content">
+			<ul id="menu_content">
+				<li class="nav-settings"><a href="#" class="label-menu-dark" onClick="loadPage(1)">Configuração</a></li>
+				<li class="nav-maps"><a href="#" class="label-menu-dark" onClick="loadPage(2)">Mapa</a></li>
+				<li class="nav-reports"><a href="#" class="label-menu-dark">Relatórios</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="cl-content" id="content">
+
+	</div>
+
+	<script>
+
+        function toogleMenu(){
+			 if (document.getElementById('drawer').style.left != '0px') {
+				$( "#drawer" ).animate({
+					left: "0px",
+				}, 500, function() {
+					document.getElementById('drawer').style.left = '0px';
+				});
+            } else {
+				$( "#drawer" ).animate({
+					left: "-400px",
+				}, 500, function() {
+					document.getElementById('drawer').style.left = '-400px';
+				});
+            }
+        }
+
+		function addMarker(lat, lng, ico, place){
+
+			 var contentString = '<div id="content">'+
+									'<div id="siteNotice">'+
+									'</div>'+
+									'<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+									'<div id="bodyContent">'+
+									'<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+									'sandstone rock formation in the southern part of the '+
+									'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+									'south west of the nearest large town, Alice Springs; 450&#160;km '+
+									'(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+									'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+									'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+									'Aboriginal people of the area. It has many springs, waterholes, '+
+									'rock caves and ancient paintings. Uluru is listed as a World '+
+									'Heritage Site.</p>'+
+									'<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+									'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+									'(last visited June 22, 2009).</p>'+
+									'</div>'+
+									'</div>';
+
+
+			var markerMap =	" var marker = new google.maps.Marker({ " +
+    						   	" 	map: map," +
+								"   animation: google.maps.Animation.DROP, " +
+    						   	" 	place: { " +
+      						   	" 		location: {lat: "+lat+", lng: "+lng+"}, " +
+      						   	" 		query: 'Philips, Blumenau, Brazil'}, " +
+							    " 		icon: '"+ico+"' " +
+								" }); "+
+								" var infoWindow = new google.maps.InfoWindow({ "+
+								"  content: '"+contentString+"' " +
+								" }); " +
+								" marker.addListener('click', function() { " +
+								" 	infoWindow.open(map, marker); " +
+								" }); ";	
+			return markerMap;
+		}
+
+/*
+		function toggleBounce() {
+			if (marker.getAnimation() !== null) {
+				marker.setAnimation(null);
+			} else {
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+			}
+		}*/
+
+		function loadPage(index){
+			if (index == 1){
+				
+				toogleMenu();
+				document.getElementById("content").innerHTML='<object type="text/html" data="cl-settings.html" ></object>';
+				/*
+				$.get("cl-settings.html", function(data){
+					$("#content").html(data);
+				});*/
+			} else if (index == 2) {
+				toogleMenu();
+				var lat = -26.893630;
+				var lng = -49.076982;
+				var ico = 'images/drop.svg';
+				var place = 'Arthur Place'
+								
+				var g = document.createElement('script');
+				var s = document.getElementsByTagName('script')[0];
+				g.text = "var map = new google.maps.Map(document.getElementById('content'), {	center: {lat: "+lat+", lng: "+lng+"}, scrollwheel: true, zoom: 14 });" + addMarker(lat, lng, ico, place);
+				s.parentNode.insertBefore(g, s);
+			}
+		}
+
+		
+/*
+            var components = '';
+            for (var i = 0; i < 12; i++) {
+                components += '<div class="cl-card"></div>';
+            }
+            document.getElementById("content").innerHTML = components;
+
+*/
+
+   
+    </script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArCbd9WZZ_APU5zQzH0HHX7bkPfI1-4hU&callback=initMap" async
+		defer></script>
+
+</body>
+
+</html>
