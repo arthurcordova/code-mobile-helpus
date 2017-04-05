@@ -1,0 +1,13 @@
+com/apps/code/mobile/rest/ClaimService.class
+com/apps/code/mobile/model/ClaimType.class
+com/apps/code/mobile/model/Claim.class
+com/apps/code/mobile/model/Reclamacoes.class
+com/apps/code/mobile/controller/ClaimController.class
+com/apps/code/mobile/db/PostgreSQLJDBC.class
+com/apps/code/mobile/rest/ReclamacaoService.class
+com/apps/code/mobile/app/MessageApplication.class
+com/apps/code/mobile/rest/SubjectService.class
+com/apps/code/mobile/controller/ReclamacoesController.class
+com/apps/code/mobile/controller/SubjectController.class
+com/apps/code/mobile/model/Subject.class
+com/apps/code/mobile/rest/MessageRestService.class
