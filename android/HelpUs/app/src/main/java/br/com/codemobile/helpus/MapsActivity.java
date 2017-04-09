@@ -21,6 +21,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -201,19 +207,48 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else if (countTeste == 2) {
             bitmap = getBitmap(this, R.drawable.ic_pin_alert);
             countTeste++;
-        }  else if (countTeste == 3) {
+        } else if (countTeste == 3) {
             bitmap = getBitmap(this, R.drawable.ic_pin_normal);
             countTeste++;
         }
         if (countTeste == 4) {
             countTeste = 0;
         }
+
+
+        // Instantiate the RequestQueue.
+        final RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://env-7102451.jelasticlw.com.br/RestEasyMaven/rest/claim/";
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Toast.makeText(MapsActivity.this, "Response is: " + response.substring(0, 500), Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MapsActivity.this, "Error ", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(stringRequest);
+
+
+// Add the request to the RequestQueue.
+
+
 //        MarkerOptions opt = new MarkerOptions();
 //        opt.position(latLng).title("Yeahhh Code mobile, I'm BunUs");
 //        opt.icon(BitmapDescriptorFactory.fromBitmap(bitmap));
 //        mMap.addMarker(opt).showInfoWindow();
 
-        startActivity(new Intent(MapsActivity.this, NewPinActivity.class));
+                startActivity(new Intent(MapsActivity.this, NewPinActivity.class));
     }
 
     private Bitmap getBitmap(VectorDrawable vectorDrawable) {
