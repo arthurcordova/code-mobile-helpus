@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#474444</color>
+    <color name="colorPrimaryDark">#474444</color>
+    <color name="colorAccent">#fff</color>
+    <color name="colorBackground">#474444</color>
+    <color name="safetyColorGreen">#3fb763</color>
+    <color name="safetyColorRed">#ff5454</color>
+</resources>
+
+    <!--FFC107-->
+
+    <!--#474444-->
+    <!--#676565-->

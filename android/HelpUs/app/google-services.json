@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "495027765577",
+    "firebase_url": "https://helpus-f4f65.firebaseio.com",
+    "project_id": "helpus-f4f65",
+    "storage_bucket": "helpus-f4f65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495027765577:android:2327adfb597c1983",
+        "android_client_info": {
+          "package_name": "br.com.codemobile.helpus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495027765577-defsfnc0iq1b6eocbpk69fsffomvt218.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMnhFJHDkZjyf3WfaRFC6mgg6Lx8FY7Js"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
