@@ -21,10 +21,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -33,6 +35,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import br.com.codemobile.helpus.activity.NewPinActivity;
 import br.com.codemobile.helpus.activity.SettingsActivity;
@@ -216,28 +224,91 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        // Instantiate the RequestQueue.
+        String claim = "{" +
+                "\"claim\": {" +
+                "\"claimTypeId\": 1," +
+                "\"registerDate\": \"2017-04-10T00:00:00-03:00\"," +
+                "\"status\": \"android\"," +
+                "\"subjectId\": 1," +
+                "\"latitude\": \"" + String.valueOf(latLng.latitude) + "\"," +
+                "\"longitude\": \"" + String.valueOf(latLng.longitude) + "\"" +
+                "}" +
+                "}";
+
         final RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://env-7102451.jelasticlw.com.br/RestEasyMaven/rest/claim/";
 
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Toast.makeText(MapsActivity.this, "Response is: " + response.substring(0, 500), Toast.LENGTH_SHORT).show();
 
-                    }
-                }, new Response.ErrorListener() {
+        JsonObjectRequest jsonObjReq = null;
+        try {
+            jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                    "http://env-7102451.jelasticlw.com.br/RestEasyMaven/rest/claim/post", new JSONObject(claim),
+                    new Response.Listener<JSONObject>() {
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MapsActivity.this, "Error ", Toast.LENGTH_SHORT).show();
-            }
-        });
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("NEWUSER", response.toString());
+//                            try {
+//                                Log.d("NEWUSER", response.toString());
+////                                pb.setVisibility(View.INVISIBLE);
+////                                Beneficiary beneficiary = new Gson().fromJson(response.getJSONObject("beneficiary").toString(), Beneficiary.class);
+////                                SharedBeneficiaryLogin.getInstance(root.getContext()).save(beneficiary);
+////
+////                                root.getContext().startActivity(new Intent(root.getContext(), MainActivity.class));
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+                        }
+                    }, new Response.ErrorListener() {
 
-        queue.add(stringRequest);
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("NEWUSER", "REQUEST ERROR");
+                }
+            }) {
+
+                /**
+                 * Passing some request headers
+                 * */
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("Content-Type", "application/json; charset=utf-8");
+                    return headers;
+                }
+            };
+            queue.add(jsonObjReq);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+        // Instantiate the RequestQueue.
+//        final RequestQueue queue = Volley.newRequestQueue(this);
+//        String url = "http://env-7102451.jelasticlw.com.br/RestEasyMaven/rest/claim/";
+//
+//// Request a string response from the provided URL.
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // Display the first 500 characters of the response string.
+//                        Toast.makeText(MapsActivity.this, "Response is: " + response.substring(0, 500), Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(MapsActivity.this, "Error ", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        queue.add(stringRequest);
 
 
 // Add the request to the RequestQueue.
