@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 
-import com.google.firebase.FirebaseApp;
+//import com.google.firebase.FirebaseApp;
 
 import br.com.codemobile.helpus.R;
 
@@ -20,7 +20,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        FirebaseApp.initializeApp(this);
+//        FirebaseApp.initializeApp(this);
 
         mContext = this;
 

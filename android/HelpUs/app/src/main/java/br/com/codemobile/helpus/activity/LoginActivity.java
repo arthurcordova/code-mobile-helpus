@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
+//import com.google.firebase.auth.FirebaseAuth;
 
 import br.com.codemobile.helpus.MapsActivity;
 import br.com.codemobile.helpus.R;
@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     Context mContext;
     EditText mLogin;
     EditText mPwd;
-    FirebaseAuth mAuth;
+//    FirebaseAuth mAuth;
 
 //    FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
 //        @Override
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance();
+//        mAuth = FirebaseAuth.getInstance();
 //        mAuth.addAuthStateListener(mAuthListener);
 
 
