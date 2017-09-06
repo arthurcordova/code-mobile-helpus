@@ -8,7 +8,7 @@
   <name>RestEasyMaven Maven Webapp</name>
   <url>http://maven.apache.org</url>
     
-
+ <!—- ARTHUR TESTE -—>
   <repositories>
 	   <repository>
 		  <id>red-hat-repository</id>
